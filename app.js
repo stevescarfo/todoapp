@@ -30,6 +30,9 @@ function add() {
     localStorage.setItem('todos',JSON.stringify(todos));
 
     show();
+
+    document.getElementById('itemToAdd').value = null;
+
  }; // end function
 
 
@@ -41,36 +44,55 @@ function  show() {
 
     for ( var i = 0; i < todos.length ; i++)
     {
-        html += '<li>' + todos[i] + '<button id= "removeItem'+[i]+'">Delete Item</button></li>';
-        console.log(html);        
-
+        html += '<li>' + todos[i] + '   <button id= "removeItem'+[i]+'">Delete Item</button></li>';
     }
 
     html += '</ul>';
 
     document.getElementById('todos').innerHTML = html;
 
+    for (n = 0; n < todos.length; n++)    
+    {
+        document.getElementById('removeItem'+n).addEventListener('click', remove);
+    }
 
 }; // end function
 
 function remove(){
-    var todos = get_todos();   
-    list = todos.JSON.parse();
+    var todos = get_todos();
 
-    for (i = 0; i < todos.length; i++)    
-    {
-        document.getElementById('removeItem'+i).addEventListener.('click', remove);
-    }
+    let i = this.id;
+
+    let item = i.substring(10,i.length);
+
+    todos.splice(item, 1);
+
+    localStorage.setItem('todos',JSON.stringify(todos));
+
+    show();
+
+    // will need to get todos
+    // use 'this' obj to get ID of button that was clicked. 
+    // extract the index integer ( 0 1 ) from that ID. remember multiple digit spaces
     
-
 }; // end function
 
 
 
 document.getElementById('addTodo').addEventListener('click', add);
 
+/* MY attempt to get the enter key to work for add function 
 
-document.getElementById("removeItem0").addEventListener('click', remove);
+document.getElementById('addTodo').addEventListener('keyup', (event) => {  
+        console.log(event.key);
+        if (event.key === 13) { 
+        add();
+        }
+    }
+);
+
+*/
+
 
 
 
@@ -81,7 +103,7 @@ document.getElementById("removeItem0").addEventListener('click', remove);
 3. you can use the ID for each item to give its button a unique ID.
 4. you can grab the ID for the todo that is to be deleted using JS.
 5. remember you can create HTML using strings including IDs.
-6. to remove an element from an array use the function slice().
+6. to remove an element from an array use the function splice().
 
 buttons have to have an event listener - those will be created at the time you dynamically create a button.
 
