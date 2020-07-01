@@ -41,20 +41,36 @@ function  show() {
 
     for ( var i = 0; i < todos.length ; i++)
     {
-        html += '<li>' + todos[i] + '&nbsp;&nbsp;&nbsp;<button>Delete Item</button></li>';
+        html += '<li>' + todos[i] + '<button id= "removeItem'+[i]+'">Delete Item</button></li>';
+        console.log(html);        
 
     }
 
     html += '</ul>';
 
     document.getElementById('todos').innerHTML = html;
+
+
 }; // end function
 
+function remove(){
+    var todos = get_todos();   
+    list = todos.JSON.parse();
+
+    for (i = 0; i < todos.length; i++)    
+    {
+        document.getElementById('removeItem'+i).addEventListener.('click', remove);
+    }
+    
+
+}; // end function
 
 
 
 document.getElementById('addTodo').addEventListener('click', add);
 
+
+document.getElementById("removeItem0").addEventListener('click', remove);
 
 
 
