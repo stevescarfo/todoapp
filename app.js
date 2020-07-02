@@ -74,24 +74,38 @@ function remove(){
     // will need to get todos
     // use 'this' obj to get ID of button that was clicked. 
     // extract the index integer ( 0 1 ) from that ID. remember multiple digit spaces
-    
+
 }; // end function
 
 
 
-document.getElementById('addTodo').addEventListener('click', add);
+//document.getElementById('addTodo').addEventListener('click', add);
 
-/* MY attempt to get the enter key to work for add function 
+document.getElementById('addTodo').addEventListener('click', function(event){ 
+    let input = document.getElementById('itemToAdd').value;
+    if (input !== "") { 
+    event.preventDefault();
+    add();
+    }//end if
 
-document.getElementById('addTodo').addEventListener('keyup', (event) => {  
-        console.log(event.key);
-        if (event.key === 13) { 
-        add();
-        }
-    }
-);
+}//end function
 
-*/
+);//end event listner
+
+// MY attempt to get the enter key to work for add function 
+
+document.addEventListener('keyup', function(event){ 
+            let input = document.getElementById('itemToAdd').value;
+            if (event.keyCode === 13 && input !== "") { 
+            event.preventDefault();
+            add();
+            }//end if
+
+    }//end function
+
+);//end event listner
+
+
 
 
 
